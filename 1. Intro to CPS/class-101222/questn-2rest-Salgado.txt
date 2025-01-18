@@ -1,0 +1,162 @@
+Name: Henry Salgado
+
+I. complete any missing lines of code to complete the aforementioned tasks.
+	The only missing code that I found to make this work is when calculating the largest. The line is 70. That is: largest = x[loop];
+II. To match the line number of the code to the tasks (a) to (e).
+For example, task (a) matches to line 2. Check below for matching. 
+III. What happens to your code if you omit including the library stdlib.h?
+We get an error. The sodlib.h is used to generate the random numbers
+
+#include <stdio.h>
+#include <stdlib.h> // needed for rand () // Part a
+
+/*
+ * Author: Henry Salgado
+ * Date: 10/14/22
+ * This program determines the maximum value in an array
+ * (a) It introduces another library called stdlib.h.
+*  (b) It generates an array of a user-defined length n.
+*  (c) This program generates a random number by calling rand(), scales it and inputs this number in the
+*    array.
+*   The function rand() returns a random number of type int but we want to store entries of type
+*   double. Hence, we enable this involving the function (double). This enables us to cast the variable
+*   as a double instead.
+*   (d) Next, this C program stores the entries of the array in a txt file called array-data.txt.
+*   (e) It then seeks to calculate the largest entry of this array.
+* 
+ */
+
+int main()
+{
+    int loop, n;
+
+    printf(" enter the number of randomly generated numbers : ");
+    scanf("%d", &n);
+    // Previous lines ask user to enter array lenght, that n value is passed to the array below
+    //Part b)
+    double x[n];
+
+    for (int i = 0; i < n; ++i)
+    {
+        // rand () is a random number generator of type int .
+        // This can be a large size int hence by multiplying
+        // with 1e -6 , we ensure that the number is not too large .
+        // Part C) The for loop iterates through the lenght of the array, the value of x[i] is set to random double value
+        x[i] = (double)(rand()) * 1e-6;
+        printf("x[%d] = %lf \n", i, x[i]);
+    }
+    // this creates a file array - data . txt to write into if the file exists ,
+    // it will merely open the file to write into it .
+    char *filename = "array-data.txt";
+
+    // open the file for writing
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL)
+    {
+        printf(" Error opening the file %s", filename);
+        return -1; //
+    }
+
+    // write to the text file
+    for (int i = 0; i < n; i++)
+    {
+        // PART D: The for loop iterates through the array lenght and writes each value of the array to a text tile
+        fprintf(fp, "%lf \n", x[i]);
+        // fprintf (fp , " This is the line #%d\n", i + 1) ;
+        // fprintf (fp , " This is the entry x[%d ]= % lf\n", i , x[i ]) ;
+    }
+    // close the file
+    fclose(fp);
+
+    double largest;
+    largest = x[0];
+
+    // Part E) The largest is set to the first item of the array, the for loop compares all values to this one, if largest is less than current iteration, then that value should be the new max;
+    for (loop = 1; loop < n; loop++)
+    {
+        if (largest < x[loop])
+        {
+            largest = x[loop];
+        } // if condition
+        //printf("largest for loop = %d is: %lf \n", loop, largest);
+    } // for - loop
+
+    printf("Largest element of array is %lf \n", largest);
+}
+
+(base) henrysalgado@henrys-mbp codes % gcc problem2.c
+(base) henrysalgado@henrys-mbp codes % ./a.out       
+ enter the number of randomly generated numbers : 10
+x[0] = 0.016807 
+x[1] = 282.475249 
+x[2] = 1622.650073 
+x[3] = 984.943658 
+x[4] = 1144.108930 
+x[5] = 470.211272 
+x[6] = 101.027544 
+x[7] = 1457.850878 
+x[8] = 1458.777923 
+x[9] = 2007.237709 
+Largest element of array is 2007.237709
+
+
+Part 3:
+
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    double number;
+
+    FILE *in_file = fopen("array-data.txt", "r"); // only open a pre - exisiting file in←-read mode .
+
+    if (!in_file) // equivalent to saying if ( in_file == NULL )
+    {
+        printf("oops , file can 't be read \n");
+        exit(-1);
+    }
+
+    // attempt to read the next line and store
+    // the value in the " number " variable
+
+    double my_array[100];
+    int i = 0;
+
+    while (fscanf(in_file, "%lf", &number) == 1)
+    {
+        printf("We just read % lf\n", number);
+        my_array[i] = number;
+        i++;
+    }
+
+    for (i = 0; i < 10; i++)
+    {
+        printf("my_array[%d] = %lf \n", i, my_array[i]);
+    }
+}
+
+
+(base) henrysalgado@henrys-mbp codes % gcc question3.c
+(base) henrysalgado@henrys-mbp codes % ./a.out        
+We just read  0.016807
+We just read  282.475249
+We just read  1622.650073
+We just read  984.943658
+We just read  1144.108930
+We just read  470.211272
+We just read  101.027544
+We just read  1457.850878
+We just read  1458.777923
+We just read  2007.237709
+my_array[0] = 0.016807 
+my_array[1] = 282.475249 
+my_array[2] = 1622.650073 
+my_array[3] = 984.943658 
+my_array[4] = 1144.108930 
+my_array[5] = 470.211272 
+my_array[6] = 101.027544 
+my_array[7] = 1457.850878 
+my_array[8] = 1458.777923 
+my_array[9] = 2007.237709 
+
+
