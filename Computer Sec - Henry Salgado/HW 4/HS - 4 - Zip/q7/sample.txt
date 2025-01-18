@@ -1,0 +1,15 @@
+THIS book tells the story of a science that has changed the way we
+distinguish facts from fiction and yet has remained under the radar of the
+general public. The consequences of the new science are already impacting
+crucial facets of our lives and have the potential to affect more, from the
+development of new drugs to the control of economic policies, from
+education and robotics to gun control and global warming. Remarkably,
+despite the diversity and apparent incommensurability of these problem areas,
+the new science embraces them all under a unified framework that was
+practically nonexistent two decades ago.
+The new science does not have a fancy name: I call it simply “causal
+inference,” as do many of my colleagues. Nor is it particularly high-tech. The
+ideal technology that causal inference strives to emulate resides within our
+own minds. Some tens of thousands of years ago, humans began to realize
+that certain things cause other things and that tinkering with the former can
+chan
